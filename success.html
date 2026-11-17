@@ -24,11 +24,23 @@
 <body>
   <main class="success-wrap">
     <section class="success-card">
-      <p class="eyebrow">MESSAGE RECEIVED</p>
-      <h1>Thank you.<br><em>We’ll be in touch.</em></h1>
-      <p>Your message has been received. The INSIDE team appreciates your interest and will contact you soon.</p>
-      <a class="button button-lime" href="/">Back to home <span aria-hidden="true">→</span></a>
+      <p class="eyebrow" data-es="MENSAJE RECIBIDO">MESSAGE RECEIVED</p>
+      <h1 data-es="Gracias.<br><em>Pronto le contactaremos.</em>">Thank you.<br><em>We’ll be in touch.</em></h1>
+      <p data-es="Hemos recibido su mensaje. El equipo de INSIDE agradece su interés y se comunicará con usted pronto.">Your message has been received. The INSIDE team appreciates your interest and will contact you soon.</p>
+      <a class="button button-lime" href="/en/" data-es='Volver al inicio <span aria-hidden="true">→</span>'>Back to home <span aria-hidden="true">→</span></a>
     </section>
   </main>
+  <script>
+    (function () {
+      var lang = null;
+      try { lang = localStorage.getItem("inside-lang"); } catch (e) {}
+      if (!lang) lang = (navigator.language || "").toLowerCase().indexOf("es") === 0 ? "es" : "en";
+      if (lang !== "es") return;
+      document.documentElement.lang = "es";
+      document.title = "Gracias | INSIDE Smart Retail";
+      document.querySelectorAll("[data-es]").forEach(function (el) { el.innerHTML = el.getAttribute("data-es"); });
+      document.querySelector(".success-card .button").setAttribute("href", "/es/");
+    })();
+  </script>
 </body>
 </html>

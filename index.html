@@ -9,6 +9,9 @@
   <meta property="og:title" content="INSIDE Smart Retail | Convenience, Reimagined.">
   <meta property="og:description" content="Smart retail for everyday spaces in Costa Rica.">
   <meta property="og:image" content="/images/hero-inside-vending.webp">
+  <link rel="alternate" hreflang="en" href="https://inside-smart-retail.netlify.app/en/">
+  <link rel="alternate" hreflang="es" href="https://inside-smart-retail.netlify.app/es/">
+  <link rel="alternate" hreflang="x-default" href="https://inside-smart-retail.netlify.app/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +34,10 @@
       <a href="#business" data-i18n="navBusiness">Business Solutions</a>
       <a href="#about" data-i18n="navAbout">About INSIDE</a>
       <a href="#contact" class="nav-cta" data-i18n="navContact">Contact us</a>
-      <button class="lang-switch" type="button" aria-label="Cambiar a español">ES</button>
+      <div class="lang-switch" role="group" aria-label="Language / Idioma">
+        <a href="/en/" hreflang="en" lang="en" data-lang="en" aria-current="true">EN</a>
+        <a href="/es/" hreflang="es" lang="es" data-lang="es">ES</a>
+      </div>
     </nav>
   </header>
 
@@ -209,13 +215,18 @@
         <p class="eyebrow"><span class="bar"></span><span data-i18n="contactEyebrow">Contact</span></p>
         <h2 data-i18n="contactTitle">A smarter space<br><em>starts here.</em></h2>
         <p data-i18n="contactText">Tell us about your location or the solution you're looking for. Let's explore what's possible.</p>
+        <div class="contact-direct">
+          <span data-i18n="contactDirect">Or write to us directly</span>
+          <a href="mailto:inside.smartvending@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M3 6.5l9 6.5 9-6.5"/></svg>inside.smartvending@gmail.com</a>
+        </div>
       </div>
       <form name="inside-contact" method="POST" action="/success.html" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="inside-contact">
+        <input type="hidden" name="language" value="en">
         <p class="hidden"><label>Do not fill this out: <input name="bot-field"></label></p>
         <label><span data-i18n="formName">Your name</span><input name="name" required autocomplete="name"></label>
         <label><span data-i18n="formCompany">Company or location</span><input name="company" autocomplete="organization"></label>
-        <label><span data-i18n="formEmail">Email address</span><input name="email" type="email" required autocomplete="email" placeholder="name@company.com"></label>
+        <label><span data-i18n="formEmail">Email address</span><input name="email" type="email" required autocomplete="email" placeholder="name@company.com" data-i18n-ph="emailPh"></label>
         <label><span data-i18n="formType">I'm interested in</span><select name="interest">
           <option value="Vending">INSIDE Vending</option>
           <option value="Coffee">INSIDE Coffee</option>
@@ -234,6 +245,7 @@
     <a class="brand footer-brand" href="#home"><span class="brand-mark">I<span>N</span>SIDE</span><span class="brand-descriptor">SMART RETAIL</span></a>
     <nav class="footer-nav" aria-label="Footer"><a href="#vending">Vending</a><a href="#coffee">Coffee</a><a href="#market">Market</a><a href="#technology">Technology</a><a href="#business" data-i18n="navBusiness">Business Solutions</a><a href="#about" data-i18n="navAbout">About INSIDE</a></nav>
     <p>Convenience, Reimagined.</p>
+    <a class="footer-email" href="mailto:inside.smartvending@gmail.com">inside.smartvending@gmail.com</a>
     <span>© <span id="year"></span> INSIDE Smart Retail · Costa Rica</span>
   </footer>
   <script src="/script.js"></script>

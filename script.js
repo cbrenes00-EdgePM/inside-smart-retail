@@ -55,40 +55,66 @@ const es = {
   formName:"Su nombre",formCompany:"Empresa o ubicación",formEmail:"Correo electrónico",formType:"Me interesa",
   optBusiness:"Soluciones empresariales",formMessage:"Cuéntenos sobre su proyecto",
   send:'Enviar consulta <span aria-hidden="true">→</span>',
-  formNote:"Su mensaje se enviará de forma segura a través de nuestro formulario de contacto."
+  formNote:"Su mensaje se enviará de forma segura a través de nuestro formulario de contacto.",
+  emailPh:"nombre@empresa.com",
+  contactDirect:"O escríbanos directamente",
+  metaTitle:"INSIDE Smart Retail | Convenience, Reimagined.",
+  metaDesc:"INSIDE Smart Retail lleva retail automatizado —vending, café, micro markets y tecnología de pago— a lugares de trabajo y espacios cotidianos en Costa Rica.",
+  menuOpen:"Abrir menú",menuClose:"Cerrar menú",brandHome:"Inicio de INSIDE Smart Retail"
 };
 
 const textEls = [...document.querySelectorAll("[data-i18n]")];
 const altEls = [...document.querySelectorAll("[data-i18n-alt]")];
-const en = {};
+const phEls = [...document.querySelectorAll("[data-i18n-ph]")];
+const metaDesc = document.querySelector('meta[name="description"]');
+const brandLink = document.querySelector(".site-header .brand");
+const en = { metaTitle: document.title, metaDesc: metaDesc.content, menuOpen: "Open menu", menuClose: "Close menu", brandHome: brandLink.getAttribute("aria-label") };
 textEls.forEach(el => { en[el.dataset.i18n] = el.innerHTML; });
 altEls.forEach(el => { en[el.dataset.i18nAlt] = el.alt; });
+phEls.forEach(el => { en[el.dataset.i18nPh] = el.placeholder; });
 
-const switcher = document.querySelector(".lang-switch");
+const langLinks = [...document.querySelectorAll(".lang-switch [data-lang]")];
+const langField = document.querySelector('input[name="language"]');
 let language = "en";
-function setLanguage(next) {
-  const dict = next === "es" ? es : en;
+let dict = en;
+function setLanguage(next, updateUrl) {
+  dict = next === "es" ? es : en;
   language = next;
   document.documentElement.lang = next;
   textEls.forEach(el => { const v = dict[el.dataset.i18n]; if (v) el.innerHTML = v; });
   altEls.forEach(el => { const v = dict[el.dataset.i18nAlt]; if (v) el.alt = v; });
-  switcher.textContent = next === "en" ? "ES" : "EN";
-  switcher.setAttribute("aria-label", next === "en" ? "Cambiar a español" : "Switch to English");
+  phEls.forEach(el => { const v = dict[el.dataset.i18nPh]; if (v) el.placeholder = v; });
+  document.title = dict.metaTitle;
+  metaDesc.content = dict.metaDesc;
+  brandLink.setAttribute("aria-label", dict.brandHome);
+  toggle.setAttribute("aria-label", menu.classList.contains("open") ? dict.menuClose : dict.menuOpen);
+  langLinks.forEach(a => a.setAttribute("aria-current", String(a.dataset.lang === next)));
+  if (langField) langField.value = next;
+  if (updateUrl && history.replaceState) history.replaceState(null, "", "/" + next + "/" + location.hash);
   try { localStorage.setItem("inside-lang", next); } catch (e) {}
 }
-switcher.addEventListener("click", () => setLanguage(language === "en" ? "es" : "en"));
-let saved = null;
-try { saved = localStorage.getItem("inside-lang"); } catch (e) {}
-if (saved === "es" || (!saved && navigator.language && navigator.language.toLowerCase().startsWith("es"))) setLanguage("es");
 
 const menu = document.querySelector(".nav");
 const toggle = document.querySelector(".menu-toggle");
-function closeMenu() { menu.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); toggle.textContent = "☰"; }
+function closeMenu() { menu.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); toggle.setAttribute("aria-label", dict.menuOpen); toggle.textContent = "☰"; }
 toggle.addEventListener("click", () => {
   const open = menu.classList.toggle("open");
   toggle.setAttribute("aria-expanded", String(open));
+  toggle.setAttribute("aria-label", open ? dict.menuClose : dict.menuOpen);
   toggle.textContent = open ? "×" : "☰";
 });
-menu.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
+menu.querySelectorAll(".nav > a").forEach(a => a.addEventListener("click", closeMenu));
+langLinks.forEach(a => a.addEventListener("click", e => {
+  e.preventDefault();
+  setLanguage(a.dataset.lang, true);
+}));
+
+// Language priority: URL (/en/, /es/) → saved choice → browser language.
+const pathLang = (location.pathname.match(/^\/(en|es)(\/|$)/) || [])[1];
+let saved = null;
+try { saved = localStorage.getItem("inside-lang"); } catch (e) {}
+const browserEs = navigator.language && navigator.language.toLowerCase().startsWith("es");
+const initial = pathLang || (saved === "es" || saved === "en" ? saved : (browserEs ? "es" : "en"));
+setLanguage(initial, false);
 
 document.getElementById("year").textContent = new Date().getFullYear();
