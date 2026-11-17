@@ -36,3 +36,11 @@ Typeface: Manrope (Google Fonts). Descriptor: SMART RETAIL.
 Tagline: “Convenience, Reimagined.”
 
 This is a first implementation draft. Verify legal brand availability, contact details, service scope, imagery rights, privacy requirements and commercial claims before production launch.
+
+
+## Restoration notes
+This package restores the original INSIDE visual identity and layout:
+Midnight `#101C2C`, Lime `#B8F36A`, Teal `#23B9AE`, Cloud `#F2F4F5`,
+and Manrope typography. The bilingual content, responsive navigation,
+and original Vending / Coffee / Market structure are retained.
+The contact form now routes to `success.html`, which follows the original brand.
