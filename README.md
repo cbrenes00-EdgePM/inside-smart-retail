@@ -2,10 +2,21 @@
 
 A responsive bilingual (English/Spanish) static website for INSIDE Smart Retail.
 
+## Site structure
+1. Home — hero photograph of an INSIDE vending machine
+2. INSIDE Vending — snacks, beverages and products
+3. INSIDE Coffee — coffee machines and experience
+4. INSIDE Market — micro markets and autonomous stores
+5. INSIDE Technology — Nayax & cashless payments, payment systems, remote monitoring, analytics & reporting
+6. Business Solutions — segments, benefits and how it works
+7. About INSIDE — value proposition, values and contact form
+
 ## Files
-- `index.html` — page structure and Netlify contact form
-- `styles.css` — responsive visual system
-- `script.js` — language switcher and mobile navigation
+- `index.html` — page structure (English copy) and Netlify contact form
+- `script.js` — Spanish translations, language switcher (remembers choice, defaults to browser language) and mobile navigation
+- `styles.css` — responsive visual system based on Brand Book 1.0
+- `images/` — optimized WebP photography
+- `favicon.svg` — provisional isotype (open frame + dot), to be replaced by the final logo files
 - `netlify.toml` — Netlify publish configuration
 
 ## Preview locally
@@ -32,7 +43,7 @@ The HTML form uses Netlify Forms (`data-netlify="true"`). After deployment, enab
 
 ## Brand system
 Midnight `#101C2C`; Lime `#B8F36A`; Teal `#23B9AE`; Cloud `#F2F4F5`.
-Typeface: Manrope (Google Fonts). Descriptor: SMART RETAIL.
+Typefaces: Manrope (headings) and Inter (body text), per Brand Book 1.0. Descriptor: SMART RETAIL.
 Tagline: “Convenience, Reimagined.”
 
 This is a first implementation draft. Verify legal brand availability, contact details, service scope, imagery rights, privacy requirements and commercial claims before production launch.
