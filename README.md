@@ -13,7 +13,7 @@ A responsive bilingual (English/Spanish) static website for INSIDE Smart Retail.
 
 ## Files
 - `index.html` — page structure (English copy) and Netlify contact form
-- `script.js` — Spanish translations, language switcher (remembers choice, defaults to browser language) and mobile navigation
+- `script.js` — Spanish translations, language switcher and mobile navigation. The English version lives at `/en/` and the Spanish version at `/es/`; the root `/` uses the saved choice or the browser language
 - `styles.css` — responsive visual system based on Brand Book 1.0
 - `images/` — optimized WebP photography
 - `favicon.svg` — provisional isotype (open frame + dot), to be replaced by the final logo files
@@ -34,7 +34,7 @@ Open `index.html` in a browser. For a local server, run:
 The HTML form uses Netlify Forms (`data-netlify="true"`). After deployment, enable form notifications in the Netlify dashboard and submit a test inquiry.
 
 ## Before connecting the production domain
-- Confirm company contact email and WhatsApp number.
+- Contact email (inside.smartvending@gmail.com) is published in the contact section and footer; confirm the WhatsApp number.
 - Replace any placeholder company details and review all claims.
 - Test both languages, mobile layouts, links and form submission.
 - Add privacy policy and cookie/analytics notices as applicable.
